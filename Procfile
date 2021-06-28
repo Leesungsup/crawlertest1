@@ -1,1 +1,1 @@
-web: gunicorn myapi.wsgi --log-file -
+web: gunicorn crawlertest.wsgi --log-file -
