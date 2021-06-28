@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environe.get('DJANGO_SECRET_KEY','django-insecure-rt3lrek!258!9%1lf@=(br*)-2b!fv8r%0mol4g=745np54@4$')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-rt3lrek!258!9%1lf@=(br*)-2b!fv8r%0mol4g=745np54@4$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',,
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'crawlertest.urls'
