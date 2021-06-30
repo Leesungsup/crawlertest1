@@ -58,27 +58,46 @@
   <div class="container>
     <div class="row mt-5">
       <div class="col-12 text-center">
-         <form>
-            <div class="form-group">
-                <label for="exampleInputName">Username</label>
-                <input type="text" class="form-control" id="exampleInputName" aria-describedby="namecheck">
-              </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <form method="POST" action=".">
+            {% csrf_token %}
+            <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="username"
+                name="username"
+              />
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="email"
+                name="email"
+              />
             </div>
             <div class="form-group">
-                <label for="exampleInputRePassword1">Re-Password</label>
-                <input type="password" class="form-control" id="exampleInputRePassword1">
-              </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="password"
+                name="password"
+              />
+            </div>
+            <div class="form-group">
+              <label for="re_password">Re-Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="re_password"
+                placeholder="re_password"
+                name="re_password"
+              />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
