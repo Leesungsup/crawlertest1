@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import BoardMember
 from django.contrib.auth.hashers import make_password,check_password
+from .form import *
 # Create your views here.
 def home(request):
     user_id=request.session.get('user')
@@ -38,24 +39,11 @@ def logout(request):
         del(request.session['user'])
     return redirect('/')
 def login(request):
-    if request.method == "GET":
-        return render(request,'login.html')
-    elif request.method == "POST":
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        print(username)
-        print(password)
-        res={}
-        if not (username and password):
-            res['error']='모든 값을 입력해주세요.'
-        else:
-            member=BoardMember.objects.get(username=username)
-            print(member.password)
-            print(check_password(password, member.password))
-            if (password==member.password):
-                print(1)
-                request.session['user']=member.id
-                return redirect('/')
-            else:
-                res['error']='비밀번호가 다릅니다!'
-        return render(request,'login.html',res)
+    if request == "POST":
+        form=LoginForm(request.POST)
+        if form.is_valid():
+            request.session['user'] = form.user_id
+            return redirect('/')
+    else:
+        form = LoginForm()
+    return render(request,'login.html',{'form': form})
