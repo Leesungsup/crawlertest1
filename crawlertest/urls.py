@@ -24,5 +24,4 @@ urlpatterns = [
     path('base/',basetest),
     path('board/',include('board.urls')),
     path('member/',include('member.urls')),
-    path('board/',include('board.urls'))
 ]

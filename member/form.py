@@ -14,12 +14,10 @@ class LoginForm(forms.Form):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-        print(username)
-        print(password)
+
         if username and password:
             member = BoardMember.objects.get(username=username)
-
             if (password==member.password):
-                self.add_error('password', '비밀번호가 다릅니다!')
-            else:
                 self.user_id = member.id
+            else:
+                self.add_error('password', '비밀번호가 다릅니다!')
