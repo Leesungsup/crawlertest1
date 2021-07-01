@@ -51,6 +51,7 @@ def login(request):
         if form.is_valid(): # 장고 폼에서 제공하는 검증 함수 is_valid()
             print(3)
             request.session['user']=form.user_id
+            print(form.user_id)
             # session_code 검증
             return redirect('/')
     else:
