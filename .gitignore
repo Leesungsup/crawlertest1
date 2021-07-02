@@ -9,3 +9,5 @@ db.squlite3
 
 .vscode/
 local_settings.py
+
+secret.json
