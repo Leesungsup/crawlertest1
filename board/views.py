@@ -21,3 +21,6 @@ def board_write(request):
     else:
         form=BoardForm()
     return render(request,'board_write.html',{'form':form})
+def board_detail(request,pk):
+    board=Board.objects.get(pk=pk)
+    return render(request,'board_detail.html',{'board':board})
