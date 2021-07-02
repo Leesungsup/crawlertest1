@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import check_password,make_password
 from django import forms
 from .models import BoardMember
+from django.core.exceptions import ObjectDoesNotExist
 class LoginForm(forms.Form):
     # 입력받을 값 두개
     username = forms.CharField(error_messages={
@@ -15,7 +16,14 @@ class LoginForm(forms.Form):
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
         if username and password:
-            member = BoardMember.objects.get(username=username)
+            try:
+                print(username)
+                member = BoardMember.objects.get(username=username)
+                print(4)
+            except BoardMember.DoesNotExist:
+                print(3)
+                self.add_error('username','아이디가 없습니다!')
+                return
             if not check_password(password, member.password):
                 self.add_error('password', '비밀번호가 다릅니다!')
             else:

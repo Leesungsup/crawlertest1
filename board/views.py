@@ -3,6 +3,7 @@ from .models import Board
 from .forms import *
 from member.models import BoardMember
 from django.http import Http404
+from django.http import HttpResponse
 # Create your views here.
 def board_list(request):
     boards= Board.objects.all().order_by('-id')
@@ -27,6 +28,6 @@ def board_write(request):
 def board_detail(request,pk):
     try:
         board=Board.objects.get(pk=pk)
-    except board.DoesNotExist:
-        raise Http404('게시글이 없습니다.')
+    except Board.DoesNotExist:
+        return HttpResponse('게시글이 없습니다.')
     return render(request,'board_detail.html',{'board':board})
