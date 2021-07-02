@@ -13,7 +13,7 @@ def home(request):
         return redirect('/')
     return HttpResponse('login fail')
 def test(request):
-    return HttpResponse("Tlqkf")
+    return HttpResponse("test")
 @csrf_exempt
 def register(request):
     if request.method == "GET":
@@ -48,7 +48,6 @@ def login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         print(2)
-        print(1)
         # 폼 객체, 폼 클래스를 만들 때 괄호에 POST 데이터를 담아준다.
         # POST 안에 있는 데이터가 form 변수에 들어간다.
         if form.is_valid(): # 장고 폼에서 제공하는 검증 함수 is_valid()
