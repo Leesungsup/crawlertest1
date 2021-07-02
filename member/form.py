@@ -1,4 +1,4 @@
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password,make_password
 from django import forms
 from .models import BoardMember
 class LoginForm(forms.Form):
@@ -14,10 +14,12 @@ class LoginForm(forms.Form):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-
+        print(password)
         if username and password:
             member = BoardMember.objects.get(username=username)
-            if (password==member.password):
-                self.user_id = member.id
-            else:
+            print(member.password)
+            print(check_password(password, member.password))
+            if not check_password(password, member.password):
                 self.add_error('password', '비밀번호가 다릅니다!')
+            else:
+                self.user_id = member.id

@@ -4,6 +4,7 @@ from .models import BoardMember
 from django.contrib.auth.hashers import make_password,check_password
 from .form import *
 from django import forms
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def home(request):
     user_id=request.session.get('user')
@@ -13,6 +14,7 @@ def home(request):
     return HttpResponse('login fail')
 def test(request):
     return HttpResponse("Tlqkf")
+@csrf_exempt
 def register(request):
     if request.method == "GET":
         return render(request,'register.html')
@@ -41,6 +43,7 @@ def logout(request):
     if request.session.get('user'):
         del(request.session['user'])
     return redirect('/')
+@csrf_exempt
 def login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)

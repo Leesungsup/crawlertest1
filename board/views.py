@@ -12,13 +12,10 @@ def board_write(request):
         if form.is_valid():
             user_id=request.session.get('user')
             member=BoardMember.objects.get(pk=user_id)
-            print(member)
             board=Board()
             board.title = form.cleaned_data['title']
             board.contents = form.cleaned_data['contents']
             board.writer=member
-            print(board.title)
-            print(board.contents)
             board.save()
             return redirect('/board/board_list/')
     else:
