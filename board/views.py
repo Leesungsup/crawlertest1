@@ -43,31 +43,34 @@ def board_delete(request, pk):
     board.delete()
     return redirect('/board/board_list/')
 def board_update(request,pk):
-    print(2)
-    board=Board.objects.get(pk=pk)
-    print(3)
     if request.method=="POST":
         print(4)
-        if (board.writer==request.user):
-            print(1)
-            form=BoardForm(request.POST,instance=board)
+        board=Board.objects.get(pk=pk)
+        user_id=request.session.get('user')
+        member=BoardMember.objects.get(pk=user_id)
+        if (board.writer==member):
+            form=BoardForm(request.POST)
+            print(5)
             if form.is_valid():
-                board=form.save(commit=False)
+                print(34)
+                board.title = form.cleaned_data['title']
+                board.contents = form.cleaned_data['contents']
+                board.writer=member
                 board.save()
-                return redirct('/board/board_detail'+str(pk))
+                print(1)
+                return redirect('/board/board_detail/'+str(pk))
             else:
-                return redirect('/board/board_detail'+str(pk))
+                return redirect('/board/board_detail/'+str(pk))
     else:
         board=Board.objects.get(pk=pk)
         print(5)
         print(board.writer)
-        print(request.user)
-        if (board.writer==request.user):
-            form=BoardForm(request.POST,instance=board)
-            context={
-                'form':form,
-                'edit':'수정하기',
-            }
-            return render(request,'board_write.html',context)
+        user_id=request.session.get('user')
+        member=BoardMember.objects.get(pk=user_id)
+        print(member)
+        if (board.writer==member):
+            form=BoardForm()
+            print(12)
+            return render(request,'board_update.html',{'post':board})
         else:
             return redirect('/board/board_detail/'+str(pk))

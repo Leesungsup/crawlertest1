@@ -1,4 +1,23 @@
-{% base.html %}
+{% extends "base.html" %}
 {% block content %}
-
-{% endblock%}
+<div class="row mt-5">
+    <h1>수정</h1>
+    <form method="POST" enctype="mulipart/form-data">
+        {% csrf_token %}
+    <div class="col-12">
+          <div class="form-group">
+            <label for="title">제목</label>
+            <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            value="{{ post.title }}">
+            <label for="title">내용</label>
+            <textarea class="form-control" name="contents">{{ post.contents }}</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">저장하기</button>
+    </div>
+</form>
+  </div>
+{% endblock %}
