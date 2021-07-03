@@ -14,7 +14,8 @@
           <textarea class="form-control" readonly>{{ board.contents }}</textarea>
         </div>
         <button class="btn btn-primary">돌아가기</button>
-    </table>
+        <button class="btn btn-primary" onclick="location.href='/board/board_detail/delete/{{ board.id }}'">삭제하기</button>
+        <button class="btn btn-primary" onclick="location.href='/board/board_detail/update/{{ board.id }}'">수정하기</button>
   </div>
 </div>
 {% endblock %}

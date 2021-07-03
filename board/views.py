@@ -39,5 +39,35 @@ def board_detail(request,pk):
     return render(request,'board_detail.html',{'board':board})
 def board_delete(request, pk):
     board = Board.objects.get(pk=pk)
+    print(board.title)
     board.delete()
     return redirect('/board/board_list/')
+def board_update(request,pk):
+    print(2)
+    board=Board.objects.get(pk=pk)
+    print(3)
+    if request.method=="POST":
+        print(4)
+        if (board.writer==request.user):
+            print(1)
+            form=BoardForm(request.POST,instance=board)
+            if form.is_valid():
+                board=form.save(commit=False)
+                board.save()
+                return redirct('/board/board_detail'+str(pk))
+            else:
+                return redirect('/board/board_detail'+str(pk))
+    else:
+        board=Board.objects.get(pk=pk)
+        print(5)
+        print(board.writer)
+        print(request.user)
+        if (board.writer==request.user):
+            form=BoardForm(request.POST,instance=board)
+            context={
+                'form':form,
+                'edit':'수정하기',
+            }
+            return render(request,'board_write.html',context)
+        else:
+            return redirect('/board/board_detail/'+str(pk))

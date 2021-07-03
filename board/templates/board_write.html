@@ -24,7 +24,11 @@
         <span style="color: red;">{{ field.errors }}</span>
         {% endif %} 
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {% if edit %}
+        <button type="submit" class="btn btn-primary">{{ edit }}</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary">작성하기</button>
+        {% endif %}
         </form>
     </table>
   </div>
