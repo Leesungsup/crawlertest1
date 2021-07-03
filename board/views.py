@@ -4,11 +4,17 @@ from .forms import *
 from member.models import BoardMember
 from django.http import Http404
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 # Create your views here.
 def board_list(request):
-    boards= Board.objects.all().order_by('-id')
+    #post=Board.objects
+    all_boards= Board.objects.all().order_by('-id')
+    page=int(request.GET.get('p',1))
+    pagenator=Paginator(all_boards,5)
+    boards=pagenator.get_page(page)
     return render(request, 'board_list.html', {"boards":boards})
 def board_write(request):
+    print(request.session.get('user'))
     if not request.session.get('user'):
         return redirect('member/login/')
     if request.method =="POST":
