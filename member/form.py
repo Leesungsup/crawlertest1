@@ -24,7 +24,7 @@ class LoginForm(forms.Form):
                 print(3)
                 self.add_error('username','아이디가 없습니다!')
                 return
-            if not check_password(password, member.password):
+            if not check_password(password,member.password):
                 self.add_error('password', '비밀번호가 다릅니다!')
             else:
                 self.user_id = member.id

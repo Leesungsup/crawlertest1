@@ -37,3 +37,7 @@ def board_detail(request,pk):
     except Board.DoesNotExist:
         return HttpResponse('게시글이 없습니다.')
     return render(request,'board_detail.html',{'board':board})
+def board_delete(request, pk):
+    board = Board.objects.get(pk=pk)
+    board.delete()
+    return redirect('/board/board_list/')
